@@ -112,17 +112,32 @@ contains(names, 'Colt', result => {
 */
 
 const uniq = (arr, callback) => {
-  arr.filter(function (element, index){
-    arr.filter(function (second, secInd){
-      if(element !== second && index !== secInd){
+  for(let i = 0; i < arr.length; i++){
+    for(let j = 0; j < arr.length; j++){
+      if(arr[i] === arr[j] && i !== j){
+        arr.splice(j, 1)
+      }
+    }
+  }
+  callback(arr)
+}
 
+const uniq2 = (arr, callback) => {
+  arr.forEach((one, oneIndex) => {
+    arr.forEach((two, twoIndex) => {
+      if(one === two && oneIndex !== twoIndex){
+        arr.splice(two)
       }
     })
   })
+  callback(arr)
 }
 
-uniq(names, uniqArr => {
+uniq(names, (uniqArr) => {
   console.log(`The new names array with all the duplicate items removed is ${uniqArr}`)
+})
+uniq2(names, (uniqArr) => {
+  console.log(`The second names array is ${uniqArr}`)
 })
 
 ////////// PROBLEM 6 //////////
@@ -132,7 +147,6 @@ uniq(names, uniqArr => {
   For each name in the array, invoke the callback and pass in the name and the name's index as arguments.
 */
 
-// CODE HERE 
 
 
 /*
