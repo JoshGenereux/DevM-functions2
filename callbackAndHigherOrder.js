@@ -156,13 +156,22 @@ uniq2(names, (uniqArr) => {
   'The item at index [INDEXPARAM] is [ITEMPARAM].'
 */
 
-// CODE HERE
+const each = (arr, callback) => {
+  arr.forEach((element, index) =>{
+    callback(element, index);
+  })
+}
+
+each(names, (item, index)=> {
+  console.log(`The item at index ${index} is ${item}`)
+})
 
 
 ////////// PROBLEM 7 //////////
 
 /*
-  Write a function called getUserById that takes in three parameters: an array of objects (users), an id and a callback, and searches for the user with a matching id.
+  Write a function called getUserById that takes in three parameters: an array of objects (users), an id and a callback,
+  and searches for the user with a matching id.
   When the correct user object is found, invoke the callback with the user object as an argument.
 */
 
@@ -189,16 +198,21 @@ var users = [
 ]
 // Do not edit the code above.
 
-// CODE HERE 
-
+const getUserById =(arr, id, callback) => {
+    arr.filter((user) => {
+      if(user.id === id){
+        callback(user)
+      }
+    })
+}
 
 // UNCOMMENT THE FUNCTION CALL BELOW
 // RUN THIS FILE WITH NODE
 // CHECK YOUR ANSWER
 
-// getUserById(users, '16t', user => {
-//   console.log('The user with the id 16t has the email of ' + user.email + ' the name of ' + user.name + ' and the address of ' + user.address) 
-// })
+getUserById(users, '16t', user => {
+  console.log('The user with the id 16t has the email of ' + user.email + ' the name of ' + user.name + ' and the address of ' + user.address)
+})
 
 ////////// CHALLENGE //////////
 
@@ -216,7 +230,11 @@ var users = [
   the two parameters together and return the sum.
 */
 
-// CODE HERE
+const addingFactory = (num) => {
+  return (number) => {
+    return number + num;
+  }
+}
 
 /*
   Now that you have addingFactory, you can create other
@@ -230,7 +248,8 @@ var users = [
   10 as an arguemnt.
 */
 
-// CODE HERE
+const addTen = addingFactory(10)
+
 
 /*
   Now the inner function is stored in the addTen variable! 
@@ -242,7 +261,8 @@ var users = [
   to see the different outputs.
 */
 
-// CODE HERE
+console.log(addTen(12))
+console.log(addTen(66))
 
 /*
   Let's make another function from the addingFactory. 
@@ -255,4 +275,5 @@ var users = [
   to add any number to your favorite number!
 */
 
-// CODE HERE
+const addThirteen = addingFactory(13)
+console.log(addThirteen(13))
