@@ -18,8 +18,12 @@ const mixedNumbers = [6,3,1,7,5,2,6,8,9,4,2,7,9,3,1,8,4,3];
 */
 
 // CODE HERE
-const evenNumbers // = mixedNumbers.filter(/* Provide Your Callback Here */)
-
+const evenNumbers  = mixedNumbers.filter((element, index, arr) => {
+    if(element % 2 === 0){
+        return mixedNumbers;
+    }
+})
+console.log(evenNumbers)
 
 
 ////////// PROBLEM 2 //////////
@@ -38,9 +42,10 @@ const prices = [15.00, 23.00, 78.00, 34.00, 12.00, 86.00, 12.00, 79.00, 32.00];
   (element, index, wholeArray)=>{}    Arrow Form
 */
 
-// CODE HERE
-const postTaxPrices // = prices.map(/* Provide Your Callback Here );
-
+ const postTaxPrices  = prices.map((element, index, arr) => {
+     return element *= 1.07;
+ });
+console.log(postTaxPrices)
 
 
 ////////// PROBLEM 3 //////////
@@ -57,8 +62,10 @@ const populations = [8175133, 3792621, 2695598, 2100263];
 */
 
 // CODE HERE
-const totalPopulation //  = populations.reduce(/* Provide Your Callback Here */)
-
+ const totalPopulation   = populations.reduce((runningTotal, element, index, arr)=>{
+     return runningTotal += element;
+ })
+console.log(totalPopulation)
 
 
 ////////// PROBLEM 4 //////////
@@ -82,8 +89,12 @@ const monstersInYourPocket = [{"monster":"Bulbabunny","CP":156},{"monster":"Bulb
 */
 
 // CODE HERE
-const myStrongest // = monstersInYourPocket.filter(/* Provide Your Callback Here */)
-
+ const myStrongest  = monstersInYourPocket.filter((element, index)=>{
+     if(element.CP > 200){
+         return monstersInYourPocket;
+     }
+ })
+console.log(myStrongest)
 
 
 ////////// PROBLEM 5 //////////
@@ -96,11 +107,14 @@ const orders = [{"price":15,"tax":0.09},{"price":42,"tax":0.07},{"price":56,"tax
 // Do not edit code above.
 
 /*
-  Use a higher order method to get all the order totals after adding in the sales tax (given to you as a tax rate, hint: you'll need to do some multiplication). Your answer should be an array of numbers, one total for each order.
+  Use a higher order method to get all the order totals after adding in the sales tax (given to you as a tax rate,
+  hint: you'll need to do some multiplication). Your answer should be an array of numbers, one total for each order.
 */
 
-// CODE HERE
-
+const afterTaxes = orders.map((element)=>{
+    return element.price += (element.price * element.tax)
+})
+console.log(afterTaxes)
 
 
 ////////// PROBLEM 6 //////////
@@ -118,5 +132,17 @@ const purchases = [{"owner":"Barry","price":103},{"owner":"Bob","price":75},
 /*
   Use a high order method(s) to create to get the sum of bobsTotal.
 */
+console.log("************ 6 ***********")
 
-// CODE HERE
+const bobsTotal = purchases.filter((element) => {
+    if(element.owner === "Bob"){
+        return true;
+    }
+}).reduce((runningSum, current)=> {
+    return runningSum + current.price
+},0)
+
+const bobsTotalLine = purchases.filter((element)=> element.owner === "Bob").reduce((sum, current)=> sum + current.price,0)
+
+console.log(bobsTotal)
+console.log(bobsTotalLine)
